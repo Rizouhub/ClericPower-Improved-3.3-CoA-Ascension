@@ -1,39 +1,44 @@
-# Cleric Power — PallyPower pour CoA Ascension (Sun Cleric)
+# Cleric Power — PallyPower for CoA Ascension (Sun Cleric)
 
-Adaptation de **PallyPower** pour le serveur privé **Project Ascension — Conquest of Azeroth**
-(WoW 3.3.5a), conçue pour la classe **Sun Cleric**. Fork de
+Adaptation of **PallyPower** for the private server **Project Ascension — Conquest of Azeroth**
+(WoW 3.3.5a), built for the **Sun Cleric** class. Fork of
 [PallyPower-Improved-3.3.5](https://github.com/NoM0Re/PallyPower-Improved-3.3.5) (NoM0Re),
-lui-même basé sur le PallyPower original *by Aznamir*.
+itself based on the original PallyPower *by Aznamir*.
 
-## Fonctionnalités CoA
+## CoA Features
 
-- **21 classes CoA** reconnues (Barbarian, Witch Doctor, Felsworn, Witch Hunter, Stormbringer,
+- All **21 CoA classes** recognized (Barbarian, Witch Doctor, Felsworn, Witch Hunter, Stormbringer,
   Knight of Xoroth, Guardian, Templar, Bloodmage, Ranger, Chronomancer, Necromancer, Pyromancer,
   Cultist, Starcaller, Sun Cleric, Tinker, Venomancer, Reaper, Primalist, Runemaster) + Pets,
-  avec leurs **logos officiels** et leurs **noms** affichés.
-- **4 Devotions** (Grace, Dawn, Emperors, Radiance) assignables sur **toutes** les classes,
-  matchées par nom pour supporter tous les rangs (clic gauche = Greater, clic droit = normale).
-- **5 Vows** (Grace, Light, Radiance, Dawn, Eclipse) — sélectionnables sur la barre principale
-  **et** dans la fenêtre d'assignation (molette / clic sur ta ligne).
-- Auto-Assign, synchronisation entre Sun Clerics, fenêtre redimensionnée pour 22 colonnes.
+  with their **official icons** and **names** shown.
+- **4 Devotions** (Grace, Dawn, Emperors, Radiance) assignable to **any** class,
+  matched by name so all ranks work (left-click = Greater, right-click = normal).
+- **5 Vows** (Grace, Light, Radiance, Dawn, Eclipse) — selectable on the main bar
+  **and** in the assignment window (mousewheel / click on your own row).
+- Auto-Assign, sync between Sun Clerics, window resized for 22 columns.
 
 ## Installation
 
-1. Télécharger le repo, dézipper, prendre le dossier **PallyPower**.
-2. Le placer dans `Interface\AddOns\`.
-3. Si tu utilisais déjà un PallyPower : supprimer ses SavedVariables
-   (`WTF\Account\...\SavedVariables\PallyPower*.lua`) pour un install propre.
-4. En jeu : `/pp` pour la barre, bouton config pour la matrice d'assignation.
+> ⚠️ **Already have PallyPower installed? Delete the old folder first — do NOT copy these files
+> over an existing PallyPower folder.** Merging the two versions will mix old and new files and
+> break the addon. Remove the old `Interface\AddOns\PallyPower` folder entirely, then install this one.
 
-## Crédits
+1. Download the repo (**Code → Download ZIP**) and unzip it.
+2. Inside, take the **`PallyPower`** folder (not the `ClericPower-Improved-...-main` wrapper).
+3. Drop it into `Interface\AddOns`.
+4. If you used a previous PallyPower, also delete its SavedVariables
+   (`WTF\Account\...\SavedVariables\PallyPower*.lua`) for a clean install.
+5. In game: `/pp` for the bar, config button for the assignment matrix.
 
-- PallyPower original : **Aznamir**
-- Version 3.3.5 Improved : **NoM0Re**
-- Adaptation CoA Ascension / Sun Cleric : **Rizou**
+## Credits
 
-Voir [`CHANGELOG-CoA.md`](CHANGELOG-CoA.md) pour le détail des modifications.
+- Original PallyPower: **Aznamir**
+- 3.3.5 Improved version: **NoM0Re**
+- CoA Ascension / Sun Cleric adaptation: **Rizou**
 
-Les icônes de classe proviennent des ressources du client Ascension.
+See [`CHANGELOG-CoA.md`](CHANGELOG-CoA.md) for the full list of changes.
+
+Class icons come from the Ascension client resources.
 
 ------------------------------------------------
 
