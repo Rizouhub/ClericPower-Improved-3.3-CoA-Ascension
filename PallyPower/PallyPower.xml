@@ -929,7 +929,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
   <Frame name="UserTemplate" hidden="false" virtual="true">
     <Size>
-	    <AbsDimension x="1072" y="80" /> 
+	    <AbsDimension x="2120" y="80" />
     </Size>
     <Layers>
 	    <Layer level="OVERLAY">
@@ -1063,7 +1063,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
         </Texture>
         <Texture name="$parentLine1" file="Interface\Tooltips\UI-Tooltip-Background" hidden="false">
         <Size>
-          <AbsDimension x="1150" y="2" /> 
+          <AbsDimension x="2120" y="2" />
         </Size>
         <Anchors>
           <Anchor point="TOPLEFT">
@@ -1400,6 +1400,105 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 			  </Anchor>
 		  </Anchors>
 	  </Button>
+	  <Button name="$parentClass12" inherits="BuffGridButtonTemplate">
+		  <Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="$parentClass11" relativePoint="TOPRIGHT">
+				  <Offset>
+					  <AbsDimension x="2" y="0" />
+				  </Offset>
+			  </Anchor>
+		  </Anchors>
+	  </Button>
+	  <Button name="$parentClass13" inherits="BuffGridButtonTemplate">
+		  <Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="$parentClass12" relativePoint="TOPRIGHT">
+				  <Offset>
+					  <AbsDimension x="2" y="0" />
+				  </Offset>
+			  </Anchor>
+		  </Anchors>
+	  </Button>
+	  <Button name="$parentClass14" inherits="BuffGridButtonTemplate">
+		  <Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="$parentClass13" relativePoint="TOPRIGHT">
+				  <Offset>
+					  <AbsDimension x="2" y="0" />
+				  </Offset>
+			  </Anchor>
+		  </Anchors>
+	  </Button>
+	  <Button name="$parentClass15" inherits="BuffGridButtonTemplate">
+		  <Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="$parentClass14" relativePoint="TOPRIGHT">
+				  <Offset>
+					  <AbsDimension x="2" y="0" />
+				  </Offset>
+			  </Anchor>
+		  </Anchors>
+	  </Button>
+	  <Button name="$parentClass16" inherits="BuffGridButtonTemplate">
+		  <Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="$parentClass15" relativePoint="TOPRIGHT">
+				  <Offset>
+					  <AbsDimension x="2" y="0" />
+				  </Offset>
+			  </Anchor>
+		  </Anchors>
+	  </Button>
+	  <Button name="$parentClass17" inherits="BuffGridButtonTemplate">
+		  <Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="$parentClass16" relativePoint="TOPRIGHT">
+				  <Offset>
+					  <AbsDimension x="2" y="0" />
+				  </Offset>
+			  </Anchor>
+		  </Anchors>
+	  </Button>
+	  <Button name="$parentClass18" inherits="BuffGridButtonTemplate">
+		  <Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="$parentClass17" relativePoint="TOPRIGHT">
+				  <Offset>
+					  <AbsDimension x="2" y="0" />
+				  </Offset>
+			  </Anchor>
+		  </Anchors>
+	  </Button>
+	  <Button name="$parentClass19" inherits="BuffGridButtonTemplate">
+		  <Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="$parentClass18" relativePoint="TOPRIGHT">
+				  <Offset>
+					  <AbsDimension x="2" y="0" />
+				  </Offset>
+			  </Anchor>
+		  </Anchors>
+	  </Button>
+	  <Button name="$parentClass20" inherits="BuffGridButtonTemplate">
+		  <Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="$parentClass19" relativePoint="TOPRIGHT">
+				  <Offset>
+					  <AbsDimension x="2" y="0" />
+				  </Offset>
+			  </Anchor>
+		  </Anchors>
+	  </Button>
+	  <Button name="$parentClass21" inherits="BuffGridButtonTemplate">
+		  <Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="$parentClass20" relativePoint="TOPRIGHT">
+				  <Offset>
+					  <AbsDimension x="2" y="0" />
+				  </Offset>
+			  </Anchor>
+		  </Anchors>
+	  </Button>
+	  <Button name="$parentClass22" inherits="BuffGridButtonTemplate">
+		  <Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="$parentClass21" relativePoint="TOPRIGHT">
+				  <Offset>
+					  <AbsDimension x="2" y="0" />
+				  </Offset>
+			  </Anchor>
+		  </Anchors>
+	  </Button>
 
   </Frames>
   </Frame>
@@ -1408,7 +1507,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
   <Frame name="PallyPowerConfigFrame" hidden="true" toplevel="true" frameStrata="HIGH" enableMouse="true" movable="true" parent="UIParent">
 	  <Size>
-		  <AbsDimension x="1170" y="960" /> 
+		  <AbsDimension x="2150" y="960" />
 	  </Size>
     <Anchors>
       <Anchor point="TOPLEFT" relativeTo="UIParent" relativePoint="BOTTOMLEFT">
@@ -1431,12 +1530,12 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 	  <Frames>
 		  <Button name="$parentTitle">
 			  <Size>
-				  <AbsDimension x="100" y="20" /> 
+				  <AbsDimension x="100" y="20" />
 			  </Size>
 			  <Anchors>
-				  <Anchor point="TOP">
+				  <Anchor point="TOPLEFT">
 					  <Offset>
-						  <AbsDimension x="0" y="-7" /> 
+						  <AbsDimension x="16" y="-7" />
 					  </Offset>
 				  </Anchor>
 			  </Anchors>
@@ -1459,7 +1558,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 			  </Scripts>
 			  <Layers>
 				  <Layer level="OVERLAY">
-					  <FontString name="$parentText" inherits="GameFontNormal" text="Pally Power" justifyH="CENTER">
+					  <FontString name="$parentText" inherits="GameFontNormal" text="Cleric Power" justifyH="CENTER">
 						  <Size>
 							  <AbsDimension x="100" y="12" /> 
 						  </Size>
@@ -1574,7 +1673,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
         <Anchors>
           <Anchor point="TOPLEFT">
             <Offset>
-              <AbsDimension x="136" y="-25" />
+              <AbsDimension x="136" y="-48" />
             </Offset>
           </Anchor>
         </Anchors>
@@ -1678,11 +1777,110 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 				  </Anchor>
 			  </Anchors>
 		  </Frame>
+		  <Frame name="$parentClassGroup12" inherits="ClassGroupTemplate">
+			  <Anchors>
+				  <Anchor point="TOPLEFT" relativeTo="$parentClassGroup11" relativePoint="TOPRIGHT">
+					  <Offset>
+						  <AbsDimension x="2" y="0" />
+					  </Offset>
+				  </Anchor>
+			  </Anchors>
+		  </Frame>
+		  <Frame name="$parentClassGroup13" inherits="ClassGroupTemplate">
+			  <Anchors>
+				  <Anchor point="TOPLEFT" relativeTo="$parentClassGroup12" relativePoint="TOPRIGHT">
+					  <Offset>
+						  <AbsDimension x="2" y="0" />
+					  </Offset>
+				  </Anchor>
+			  </Anchors>
+		  </Frame>
+		  <Frame name="$parentClassGroup14" inherits="ClassGroupTemplate">
+			  <Anchors>
+				  <Anchor point="TOPLEFT" relativeTo="$parentClassGroup13" relativePoint="TOPRIGHT">
+					  <Offset>
+						  <AbsDimension x="2" y="0" />
+					  </Offset>
+				  </Anchor>
+			  </Anchors>
+		  </Frame>
+		  <Frame name="$parentClassGroup15" inherits="ClassGroupTemplate">
+			  <Anchors>
+				  <Anchor point="TOPLEFT" relativeTo="$parentClassGroup14" relativePoint="TOPRIGHT">
+					  <Offset>
+						  <AbsDimension x="2" y="0" />
+					  </Offset>
+				  </Anchor>
+			  </Anchors>
+		  </Frame>
+		  <Frame name="$parentClassGroup16" inherits="ClassGroupTemplate">
+			  <Anchors>
+				  <Anchor point="TOPLEFT" relativeTo="$parentClassGroup15" relativePoint="TOPRIGHT">
+					  <Offset>
+						  <AbsDimension x="2" y="0" />
+					  </Offset>
+				  </Anchor>
+			  </Anchors>
+		  </Frame>
+		  <Frame name="$parentClassGroup17" inherits="ClassGroupTemplate">
+			  <Anchors>
+				  <Anchor point="TOPLEFT" relativeTo="$parentClassGroup16" relativePoint="TOPRIGHT">
+					  <Offset>
+						  <AbsDimension x="2" y="0" />
+					  </Offset>
+				  </Anchor>
+			  </Anchors>
+		  </Frame>
+		  <Frame name="$parentClassGroup18" inherits="ClassGroupTemplate">
+			  <Anchors>
+				  <Anchor point="TOPLEFT" relativeTo="$parentClassGroup17" relativePoint="TOPRIGHT">
+					  <Offset>
+						  <AbsDimension x="2" y="0" />
+					  </Offset>
+				  </Anchor>
+			  </Anchors>
+		  </Frame>
+		  <Frame name="$parentClassGroup19" inherits="ClassGroupTemplate">
+			  <Anchors>
+				  <Anchor point="TOPLEFT" relativeTo="$parentClassGroup18" relativePoint="TOPRIGHT">
+					  <Offset>
+						  <AbsDimension x="2" y="0" />
+					  </Offset>
+				  </Anchor>
+			  </Anchors>
+		  </Frame>
+		  <Frame name="$parentClassGroup20" inherits="ClassGroupTemplate">
+			  <Anchors>
+				  <Anchor point="TOPLEFT" relativeTo="$parentClassGroup19" relativePoint="TOPRIGHT">
+					  <Offset>
+						  <AbsDimension x="2" y="0" />
+					  </Offset>
+				  </Anchor>
+			  </Anchors>
+		  </Frame>
+		  <Frame name="$parentClassGroup21" inherits="ClassGroupTemplate">
+			  <Anchors>
+				  <Anchor point="TOPLEFT" relativeTo="$parentClassGroup20" relativePoint="TOPRIGHT">
+					  <Offset>
+						  <AbsDimension x="2" y="0" />
+					  </Offset>
+				  </Anchor>
+			  </Anchors>
+		  </Frame>
+		  <Frame name="$parentClassGroup22" inherits="ClassGroupTemplate">
+			  <Anchors>
+				  <Anchor point="TOPLEFT" relativeTo="$parentClassGroup21" relativePoint="TOPRIGHT">
+					  <Offset>
+						  <AbsDimension x="2" y="0" />
+					  </Offset>
+				  </Anchor>
+			  </Anchors>
+		  </Frame>
 		  <Frame name="$parentPlayer1" inherits="UserTemplate">
 			  <Anchors>
 				  <Anchor point="TOPLEFT">
 					  <Offset>
-						  <AbsDimension x="8" y="-217" /> 
+						  <AbsDimension x="8" y="-116" />
 					  </Offset>
 				  </Anchor>
 			  </Anchors>

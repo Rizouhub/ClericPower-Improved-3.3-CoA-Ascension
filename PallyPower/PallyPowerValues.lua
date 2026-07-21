@@ -2615,3 +2615,179 @@ PallyPower.Layouts = PallyPower.IsVanilla and {
 		 		au = {x = 1, y = 0},
 	},
  }
+-- ==========================================================================
+-- CoA Ascension (Conquest of Azeroth) - Adaptation Sun Cleric
+-- Overrides appliques APRES les definitions d'origine (client 3.3.5 / Wrath)
+-- ==========================================================================
+
+PALLYPOWER_MAXCLASSES = 22 -- 21 classes CoA + Pets
+PALLYPOWER_NORMALBLESSINGDURATION = 30*60  -- Devotions : 30 min
+PALLYPOWER_GREATERBLESSINGDURATION = 30*60 -- Greater Devotions : 30 min
+PALLYPOWER_MAXBLESSINGS = 4
+
+-- Defauts adaptes
+PALLYPOWER_DEFAULT_VALUES.display.rows = 22
+PALLYPOWER_DEFAULT_VALUES.layout = "Standard"  -- layouts fixes limites a 11 classes
+PALLYPOWER_DEFAULT_VALUES.smartpets = false    -- detection pets basee sur classes Blizzard
+PALLYPOWER_DEFAULT_VALUES.sets.primary.buffs = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+PALLYPOWER_DEFAULT_VALUES.sets.secondary.buffs = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+
+-- 21 classes CoA + Pets
+PallyPower.ClassID = {
+	[1]  = "BARBARIAN",
+	[2]  = "WITCHDOCTOR",
+	[3]  = "DEMONHUNTER",   -- Felsworn
+	[4]  = "WITCHHUNTER",
+	[5]  = "STORMBRINGER",
+	[6]  = "FLESHWARDEN",   -- Knight of Xoroth
+	[7]  = "GUARDIAN",
+	[8]  = "MONK",          -- Templar
+	[9]  = "SONOFARUGAL",   -- Bloodmage
+	[10] = "RANGER",
+	[11] = "CHRONOMANCER",
+	[12] = "NECROMANCER",
+	[13] = "PYROMANCER",
+	[14] = "CULTIST",
+	[15] = "STARCALLER",
+	[16] = "SUNCLERIC",
+	[17] = "TINKER",
+	[18] = "PROPHET",       -- Venomancer
+	[19] = "REAPER",
+	[20] = "WILDWALKER",    -- Primalist
+	[21] = "SPIRITMAGE",    -- Runemaster
+	[22] = "PET",
+}
+
+PallyPower.ClassToID = {}
+for id, token in pairs(PallyPower.ClassID) do
+	PallyPower.ClassToID[token] = id
+end
+
+PallyPower.ClassIcons = {
+	[1] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Barbarian",
+	[2] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_WitchDoctor",
+	[3] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Felsworn",
+	[4] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_WitchHunter",
+	[5] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Stormbringer",
+	[6] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_KnightOfXoroth",
+	[7] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Guardian",
+	[8] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Templar",
+	[9] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Bloodmage",
+	[10] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Ranger",
+	[11] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Chronomancer",
+	[12] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Necromancer",
+	[13] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Pyromancer",
+	[14] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Cultist",
+	[15] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Starcaller",
+	[16] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_SunCleric",
+	[17] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Tinker",
+	[18] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Venomancer",
+	[19] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Reaper",
+	[20] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Primalist",
+	[21] = "Interface\\AddOns\\PallyPower\\Icons\\CoA_Runemaster",
+	[22] = "Interface\\AddOns\\PallyPower\\Icons\\Pet",
+}
+
+-- Devotions (match par nom : GetSpellInfo(id) -> nom, le cast utilise le rang max connu)
+-- Ordre : 1=Grace (mana), 2=Dawn (AP), 3=Emperors (stats), 4=Radiance (SP)
+PallyPower.Spells = {
+	[0] = "",
+	[1] = GetSpellInfo(300862), -- Devotion of Grace
+	[2] = GetSpellInfo(572386), -- Devotion of Dawn
+	[3] = GetSpellInfo(572552), -- Devotion of Emperors
+	[4] = GetSpellInfo(575040), -- Devotion of Radiance
+}
+
+PallyPower.GSpells = {
+	[0] = "",
+	[1] = GetSpellInfo(681160), -- Greater Devotion of Grace
+	[2] = GetSpellInfo(572390), -- Greater Devotion of Dawn
+	[3] = GetSpellInfo(572553), -- Greater Devotion of Emperors
+	[4] = GetSpellInfo(575045), -- Greater Devotion of Radiance
+}
+
+-- Icones tirees directement du serveur (3e retour de GetSpellInfo)
+local function PP_SpellIcon(id)
+	local icon = select(3, GetSpellInfo(id))
+	return icon or "Interface\\Icons\\INV_Misc_QuestionMark"
+end
+
+PallyPower.BlessingIcons = {
+	[-1] = "",
+	[1] = PP_SpellIcon(681160),
+	[2] = PP_SpellIcon(572390),
+	[3] = PP_SpellIcon(572553),
+	[4] = PP_SpellIcon(575045),
+}
+
+PallyPower.NormalBlessingIcons = {
+	[-1] = "",
+	[1] = PP_SpellIcon(300862),
+	[2] = PP_SpellIcon(572386),
+	[3] = PP_SpellIcon(572552),
+	[4] = PP_SpellIcon(575040),
+}
+
+-- Vows = equivalents des Sceaux
+PallyPower.Seals = {
+	[0] = "",
+	[1] = GetSpellInfo(803719), -- Vow of Grace
+	[2] = GetSpellInfo(807547), -- Vow of Light
+	[3] = GetSpellInfo(803489), -- Vow of Radiance
+	[4] = GetSpellInfo(803491), -- Vow of Dawn
+	[5] = GetSpellInfo(807435), -- Vow of the Eclipse
+	[6] = "", [7] = "", [8] = "", [9] = "", [10] = "",
+}
+
+-- Templates auto-assign regeneres pour 22 classes
+-- Priorite : Emperors (3), puis Grace (1), Dawn (2), Radiance (4)
+PallyPower.Templates = {}
+for n = 1, 6 do
+	local t = {}
+	for c = 1, PALLYPOWER_MAXCLASSES do
+		if n == 1 then
+			t[c] = {3}
+		elseif n == 2 then
+			t[c] = {3, 1}
+		elseif n == 3 then
+			t[c] = {3, 1, 2}
+		else
+			t[c] = {3, 1, 2, 4}
+		end
+	end
+	PallyPower.Templates[n] = t
+end
+
+-- Noms lisibles des classes CoA (tooltips + grille de config)
+PallyPower.ClassNames = {
+	[1]  = "Barbarian",
+	[2]  = "Witch Doctor",
+	[3]  = "Felsworn",
+	[4]  = "Witch Hunter",
+	[5]  = "Stormbringer",
+	[6]  = "Knight of Xoroth",
+	[7]  = "Guardian",
+	[8]  = "Templar",
+	[9]  = "Bloodmage",
+	[10] = "Ranger",
+	[11] = "Chronomancer",
+	[12] = "Necromancer",
+	[13] = "Pyromancer",
+	[14] = "Cultist",
+	[15] = "Starcaller",
+	[16] = "Sun Cleric",
+	[17] = "Tinker",
+	[18] = "Venomancer",
+	[19] = "Reaper",
+	[20] = "Primalist",
+	[21] = "Runemaster",
+	[22] = "Pets",
+}
+
+-- CoA : icones de classe via l'atlas du client (CLASS_ICON_TCOORDS),
+-- avec repli sur PallyPower.ClassIcons si la classe n'y figure pas
+PallyPower.ClassIconAtlas = "Interface\\WorldStateFrame\\ICONS-CLASSES"
+function PallyPower.SetClassIcon(tex, classID)
+	tex:SetTexture(PallyPower.ClassIcons[classID])
+	tex:SetTexCoord(0, 1, 0, 1)
+end

@@ -437,7 +437,17 @@ function PallyPowerConfigGrid_Update()
 			else
 				getglobal(fname.."ClassButtonHighlight"):Hide()
 			end
-			getglobal(fname.."ClassButtonIcon"):SetTexture(PallyPower.ClassIcons[i])
+			PallyPower.SetClassIcon(getglobal(fname.."ClassButtonIcon"), i) -- CoA atlas
+			local ppCBtn = getglobal(fname.."ClassButton") -- CoA : afficher le nom de classe
+			if ppCBtn then
+				if not ppCBtn.ppName then
+					ppCBtn.ppName = ppCBtn:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+					ppCBtn.ppName:SetPoint("BOTTOM", ppCBtn, "TOP", 0, 2)
+					ppCBtn.ppName:SetWidth(80)
+					ppCBtn.ppName:SetJustifyH("CENTER")
+				end
+				ppCBtn.ppName:SetText(PallyPower.ClassNames and PallyPower.ClassNames[i] or "")
+			end
 			for j = 1, PALLYPOWER_MAXPERCLASS do
 				local pbnt = fname.."PlayerButton"..j
 				if classes[i] and classes[i][j] then
@@ -499,6 +509,7 @@ function PallyPowerConfigGrid_Update()
 							getglobal(fname.."Icon"..id):SetTexture("Interface\\Icons\\Spell_Nature_LightningShield")
 						end
 					end
+					getglobal(fname.."Icon"..id):SetTexture(PallyPower.NormalBlessingIcons[id]) -- CoA
 					getglobal(fname.."Icon"..id):Show()
 					getglobal(fname.."Skill"..id):Show()
 					local txt = SkillInfo[id].rank
@@ -538,11 +549,17 @@ function PallyPowerConfigGrid_Update()
 				end
 			end
 			
-			local aura = PallyPower_AuraAssignments[flavor][name]
-			if ( aura and aura > 0 ) then
-				getglobal(fname.."Aura1Icon"):SetTexture(PallyPower.AuraIcons[aura])
+			if name == PallyPower.player then -- CoA : cet emplacement affiche le Vow du joueur local
+				local vowName = PallyPower.Seals[PallyPower.opt.seal or 0]
+				local vicon = (vowName and vowName ~= "") and select(3, GetSpellInfo(vowName)) or nil
+				getglobal(fname.."Aura1Icon"):SetTexture(vicon)
 			else
-				getglobal(fname.."Aura1Icon"):SetTexture(nil)
+				local aura = PallyPower_AuraAssignments[flavor][name]
+				if ( aura and aura > 0 ) then
+					getglobal(fname.."Aura1Icon"):SetTexture(PallyPower.AuraIcons[aura])
+				else
+					getglobal(fname.."Aura1Icon"):SetTexture(nil)
+				end
 			end
 
 			for id = 1, PALLYPOWER_MAXCLASSES do
@@ -556,8 +573,8 @@ function PallyPowerConfigGrid_Update()
 			i = i + 1
 			numPallys = numPallys + 1
 		end
-		PallyPowerConfigFrame:SetHeight(14 + 24 + 56 + (numPallys * 80) + 22 + 13 * numMaxClass)
-		getglobal("PallyPowerConfigFramePlayer1"):SetPoint("TOPLEFT", 8, -80 - 13 * numMaxClass)
+		PallyPowerConfigFrame:SetHeight(14 + 24 + 56 + 23 + (numPallys * 80) + 22 + 13 * numMaxClass) -- CoA : +23 (noms de classes)
+		getglobal("PallyPowerConfigFramePlayer1"):SetPoint("TOPLEFT", 8, -103 - 13 * numMaxClass) -- CoA : -80-23
 		for i = 1, PALLYPOWER_MAXCLASSES do
 			getglobal("PallyPowerConfigFrameClassGroup" .. i .. "Line"):SetHeight(56 + 13 * numMaxClass)
 		end
@@ -792,20 +809,8 @@ function PallyPower:NeedsBuff(class, test, playerName)
 		return true
 	end
 
-	if self.opt.smartbuffs then
-		-- no wisdom for warriors, rogues and DKs
-		if (class == 1 or class == 2 or (PallyPower.IsWrath and class == 10)) and test == 1 then
-			return false
-		end
-		-- no salv for warriors except normal blessings
-		--if not playerName and class == 1 and test == 3 then
-		--	return false
-		--end
-		-- no might for casters
-		if (class == 3 or class == 7 or class == 8) and test == 2 then
-			return false
-		end
-	end
+	-- CoA Ascension : toutes les classes peuvent jouer tous les roles,
+	-- aucun filtre de blessing par classe
 
 	if playerName then
 		for pname, classes in pairs(PallyPower_NormalAssignments[flavor]) do
@@ -832,7 +837,7 @@ end
 function PallyPower:ScanSpells()
 	self:Debug("Scan Spells -- begin")
 	local _, class=UnitClass("player")
-	if (class == "PALADIN") then
+	if (class == "SUNCLERIC") then -- CoA Ascension
 		local RankInfo = {}
 		for i = 1, PALLYPOWER_MAXBLESSINGS do -- find max spell ranks
 			local spellName, spellRank = GetSpellInfo(PallyPower.GSpells[i])
@@ -853,17 +858,7 @@ function PallyPower:ScanSpells()
 			if spellName then
 				RankInfo[i] = {}
 				RankInfo[i].rank = rank
-				if i == 1 then -- Wisdom
-					talent = talent + select(5, GetTalentInfo(1, 10))
-				elseif i == 2 then -- Might
-					if PallyPower.IsVanillaOrTBC then
-						talent = talent + select(5, GetTalentInfo(3, 1))
-					else
-						talent = talent + select(5, GetTalentInfo(3, 5))
-					end
-				--elseif i == 3 then -- Kings
-				--	talent = talent + select(5, GetTalentInfo(2, 2))
-				end
+				-- CoA Ascension : arbres de talents customs, talent reste 0
 
 				RankInfo[i].talent = talent
 			end
@@ -1047,7 +1042,7 @@ end
 function PallyPower:ACTIVE_TALENT_GROUP_CHANGED()
 	local i, old, new
 	local _, class=UnitClass("player")
-	if (class == "PALADIN") then
+	if (class == "SUNCLERIC") then -- CoA Ascension
 		if GetActiveTalentGroup() == 1 then
 			old = "secondary"
 			new = "primary"
@@ -1525,6 +1520,16 @@ function PallyPower:CreateLayout()
 		cButton:RegisterForClicks("LeftButtonDown", "RightButtonDown")
 		cButton:EnableMouseWheel(1)
         self.classButtons[cbNum] = cButton
+		-- CoA : tooltip avec le nom de la classe
+		cButton:HookScript("OnEnter", function(btn)
+			local id = btn:GetAttribute("classID")
+			if id and id > 0 and PallyPower.ClassNames and PallyPower.ClassNames[id] then
+				GameTooltip:SetOwner(btn, "ANCHOR_LEFT")
+				GameTooltip:SetText(PallyPower.ClassNames[id])
+				GameTooltip:Show()
+			end
+		end)
+		cButton:HookScript("OnLeave", function() GameTooltip:Hide() end)
 
 		-- create player buttons
 		self.playerButtons[cbNum] = {}
@@ -1597,6 +1602,9 @@ function PallyPower:UpdateLayout()
 	if InCombatLockdown() then return false end
 
 	PallyPowerFrame:SetScale(self.opt.buffscale)
+
+	if self.opt.layout ~= "Standard" then self.opt.layout = "Standard" end -- CoA : layouts fixes limites a 11 classes
+	self.opt.rfbuff = true -- CoA : bouton Vow (equivalent Sceau/RF) toujours actif
 
 	if self.opt.layout == "Standard" then
 
@@ -2102,7 +2110,7 @@ function PallyPower:UpdateButton(button, baseName, classID)
 			ndead = ndead + 1
 		end
 	end
-	classIcon:SetTexture(self.ClassIcons[classID])
+	PallyPower.SetClassIcon(classIcon, classID) -- CoA atlas
 	classIcon:SetVertexColor(1, 1, 1)
 	local _, gspellID = PallyPower:GetSpellID(classID)
 	buffIcon:SetTexture(self.BlessingIcons[gspellID])
@@ -3045,6 +3053,9 @@ function PallyPower:AutoAssignBlessings()
 		PallyPower:SelectBuffsByClass(pallycount, 9, pt[9]) 	-- shaman
 		PallyPower:SelectBuffsByClass(pallycount, 10, pt[10]) 	-- dk
 		PallyPower:SelectBuffsByClass(pallycount, 11, pt[11]) 	-- pets
+		for c = 12, PALLYPOWER_MAXCLASSES do -- CoA : classes 12-22
+			PallyPower:SelectBuffsByClass(pallycount, c, pt[c])
+		end
 	end
 end
 
@@ -3149,6 +3160,16 @@ function PallyPowerAuraButton_OnClick(btn, mouseBtn)
 	local pname = getglobal("PallyPowerConfigFramePlayer"..pnum.."Name"):GetText()
 	if not PallyPower:CanControl(pname) then return false end
 
+	if pname == PallyPower.player then -- CoA : pilote le Vow du joueur local
+		if (mouseBtn == "RightButton") then
+			PallyPower:SealAssign(0)
+		else
+			PallyPower:SealCycle()
+		end
+		PallyPowerConfigGrid_Update()
+		return
+	end
+
 	if (mouseBtn == "RightButton") then
 		PallyPower_AuraAssignments[flavor][pname] = 0
 		PallyPower:SendMessage("AASSIGN "..pname.." 0")
@@ -3163,6 +3184,16 @@ function PallyPowerAuraButton_OnMouseWheel(btn, arg1)
 	pnum = pnum + 0
 	local pname = getglobal("PallyPowerConfigFramePlayer"..pnum.."Name"):GetText()
 	if not PallyPower:CanControl(pname) then return false end
+
+	if pname == PallyPower.player then -- CoA : pilote le Vow du joueur local
+		if (arg1 == -1) then
+			PallyPower:SealCycle()
+		else
+			PallyPower:SealCycleBackward()
+		end
+		PallyPowerConfigGrid_Update()
+		return
+	end
 
 	if (arg1==-1) then  --mouse wheel down
 		PallyPower:PerformAuraCycle(pname)
