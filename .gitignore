@@ -1,0 +1,5 @@
+coa_icons.json
+*.original.md
+*_BACKUP*/
+.DS_Store
+Thumbs.db

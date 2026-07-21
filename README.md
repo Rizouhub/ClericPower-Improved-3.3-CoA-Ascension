@@ -1,3 +1,42 @@
+# Cleric Power — PallyPower pour CoA Ascension (Sun Cleric)
+
+Adaptation de **PallyPower** pour le serveur privé **Project Ascension — Conquest of Azeroth**
+(WoW 3.3.5a), conçue pour la classe **Sun Cleric**. Fork de
+[PallyPower-Improved-3.3.5](https://github.com/NoM0Re/PallyPower-Improved-3.3.5) (NoM0Re),
+lui-même basé sur le PallyPower original *by Aznamir*.
+
+## Fonctionnalités CoA
+
+- **21 classes CoA** reconnues (Barbarian, Witch Doctor, Felsworn, Witch Hunter, Stormbringer,
+  Knight of Xoroth, Guardian, Templar, Bloodmage, Ranger, Chronomancer, Necromancer, Pyromancer,
+  Cultist, Starcaller, Sun Cleric, Tinker, Venomancer, Reaper, Primalist, Runemaster) + Pets,
+  avec leurs **logos officiels** et leurs **noms** affichés.
+- **4 Devotions** (Grace, Dawn, Emperors, Radiance) assignables sur **toutes** les classes,
+  matchées par nom pour supporter tous les rangs (clic gauche = Greater, clic droit = normale).
+- **5 Vows** (Grace, Light, Radiance, Dawn, Eclipse) — sélectionnables sur la barre principale
+  **et** dans la fenêtre d'assignation (molette / clic sur ta ligne).
+- Auto-Assign, synchronisation entre Sun Clerics, fenêtre redimensionnée pour 22 colonnes.
+
+## Installation
+
+1. Télécharger le repo, dézipper, prendre le dossier **PallyPower**.
+2. Le placer dans `Interface\AddOns\`.
+3. Si tu utilisais déjà un PallyPower : supprimer ses SavedVariables
+   (`WTF\Account\...\SavedVariables\PallyPower*.lua`) pour un install propre.
+4. En jeu : `/pp` pour la barre, bouton config pour la matrice d'assignation.
+
+## Crédits
+
+- PallyPower original : **Aznamir**
+- Version 3.3.5 Improved : **NoM0Re**
+- Adaptation CoA Ascension / Sun Cleric : **Rizou**
+
+Voir [`CHANGELOG-CoA.md`](CHANGELOG-CoA.md) pour le détail des modifications.
+
+Les icônes de classe proviennent des ressources du client Ascension.
+
+------------------------------------------------
+
 # PallyPower-Improved-3.3.5
 
 ![PallyPower Example](https://github.com/NoM0Re/PallyPower-Improved-3.3.5/blob/main/PallyPower_Flash.gif)<br/><br/>
